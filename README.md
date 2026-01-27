@@ -37,18 +37,7 @@ Infrastructure as Code pour déployer des VMs sur Proxmox VE pour un Kubernetes 
 
 ## Démarrage rapide
 
-### 1. Créer le template Rocky Linux 9
-
-Sur le serveur Proxmox :
-
-```bash
-scp create-rocky9-template.sh root@<PROXMOX_IP>:/tmp/
-ssh root@<PROXMOX_IP>
-chmod +x /tmp/create-rocky9-template.sh
-/tmp/create-rocky9-template.sh
-```
-
-### 2. Configurer les variables
+### 1. Configurer les variables
 
 Créez/modifiez `terraform.tfvars` :
 
@@ -56,10 +45,10 @@ Créez/modifiez `terraform.tfvars` :
 proxmox_password = "votre-mot-de-passe"
 ssh_public_key   = "ssh-rsa AAAAB3..."
 proxmox_host     = "192.168.1.100"
-proxmox_node     = "pve"
+proxmox_node     = "devsecops-dojo"
 ```
 
-### 3. Déployer
+### 2. Déployer
 
 ```bash
 terraform init
@@ -67,16 +56,19 @@ terraform plan
 terraform apply
 ```
 
+**Le script de création du template Rocky Linux 9 s'exécutera automatiquement via SSH.**
+
 ## Fichiers
 
 | Fichier | Description |
-|---------|-------------|10 VMs (Rancher + Payload + CI/CD) |
+|---------|-------------|
+| `main.tf` | Définition des 10 VMs (Rancher + Payload + CI/CD) |
 | `variables.tf` | Variables Terraform |
-| `terraform.tfvars` | Valeurs des variables (ne pas committer) |
+| `terraform.tfvars` | Valeurs des variables |
 | `providers.tf` | Configuration du provider Proxmox bpg/proxmox v0.50.0 |
 | `outputs.tf` | Outputs : IDs, noms, IPs des VMs |
-| `create-rocky9-template.sh` | Script de création du template Rocky 9|
-| `template.tf` | Configuration du template |
+| `template-init.tf` | Création automatique du template Rocky 9 via SSH |
+| `create-rocky9-template.sh` | Script de création du template Rocky 9 |
 
 ## Ressources déployées
 
