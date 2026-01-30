@@ -3,15 +3,6 @@
 # Exécute le script de création du template via SSH
 # ========================================
 
-terraform {
-  required_providers {
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 3.2"
-    }
-  }
-}
-
 resource "null_resource" "rocky_template" {
   provisioner "file" {
     source      = "${path.module}/create-rocky9-template.sh"
