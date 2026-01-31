@@ -1,5 +1,7 @@
 # Terraform
 .terraform/
+**/registry.terraform.io/
+**/.terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
 *.tfstate
